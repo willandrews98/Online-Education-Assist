@@ -26,20 +26,21 @@ namespace Dissertation_Project.Controllers
         }
 
         public IActionResult Create()
-        {
-            _
+        { 
+
+            return RedirectToAction("Chat", new { sesson = sesson});
         }
 
-        public IActionResult Chat(int? id)
+        public IActionResult Chat(SessonModel sesson)
         {
-            if(id == null)
+            if(sesson == null)
             {
                 return NotFound();
             }
             
            
            
-            return View();
+            return View(sesson.SessonId);
         }
 
         public IActionResult Privacy()
