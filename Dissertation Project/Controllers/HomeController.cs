@@ -25,6 +25,18 @@ namespace Dissertation_Project.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Chat(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            if
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
