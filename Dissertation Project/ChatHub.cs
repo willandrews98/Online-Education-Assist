@@ -12,5 +12,15 @@ namespace Dissertation_Project
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
+
+        public async Task SendTask(string message)
+        {
+            await Clients.All.SendAsync("ReceiveTaskMessage", message);
+        }
+
+        public async Task ReplyTask(string user, string message)
+        {
+            await Clients.All.SendAsync("ReplyTask", user, message);
+        }
     }
 }
