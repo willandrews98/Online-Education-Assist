@@ -25,6 +25,23 @@ namespace Dissertation_Project.Controllers
             return View();
         }
 
+        public IActionResult Create()
+        {
+            _
+        }
+
+        public IActionResult Chat(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            
+           
+           
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
