@@ -25,12 +25,12 @@ namespace Dissertation_Project.Controllers
             return View();
         }
 
-        public IActionResult Create()
+/*        public IActionResult Create()
         { 
 
-            return RedirectToAction("Chat", new { sesson = sesson});
+            return RedirectToAction("Chat", new { sesson = SessonModel});
         }
-
+*/
         public IActionResult Chat(SessonModel sesson)
         {
             if(sesson == null)
@@ -40,7 +40,7 @@ namespace Dissertation_Project.Controllers
             
            
            
-            return View(sesson.SessonId);
+            return View(sesson);
         }
 
         public IActionResult Privacy()
