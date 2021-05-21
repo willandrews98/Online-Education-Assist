@@ -8,12 +8,26 @@
                 <h2 id="TaskMessage"></h2>
             </div>
         </div>
-        <div class="row text-sm-center" >
-            <div class="col-sm-4"> <p>Test 1</p></div>
-            <div class="col-sm-4"> <p>Test 2</p></div>
+        <div class="row text-sm-center mt-2" >
+            <div class="col-sm-4 card">
+                <h5 class="card-header">@User.Identity.Name</h5>
+                <div class="card-body">
+                    <div class="circleGreen"></div>
+                    <div class="circleOrg"></div>
+                    <div class="circleRed"></div>
+                    <div> Notes</div>
+                </div>
+            </div>
+            
         </div>
 
-        <div class=""></div>
+        <div class="mt-4 card card-body">
+            <div class="btn btn-success mt-1" id="SendButtonGreen">1</div>
+            <div class="btn btn-success mt-1" id="SendButtonOrg">2</div>
+            <div class="btn btn-success mt-1" id="SendButtonRed">3</div>
+            <input class="mt-1" type="text" id="NoteMessage" placeholder="Put note to teacher" />
+            <input type="button" id="SendButtonNotes" value="Send Note" />
+        </div>
     </div>
     <div class="col-sm-4">
         <div class="card overflow-scroll-y vh-65">
@@ -30,6 +44,35 @@
     </div>
 </div>
 
+<style>
+    .circle {
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+    }
+
+
+    .circleGreen {
+        height: 20px;
+        width: 20px;
+        background-color: #006400;
+        border-radius: 50%;
+    }
+
+    .circleOrg {
+        height: 20px;
+        width: 20px;
+        background-color: #FF8C00;
+        border-radius: 50%;
+    }
+
+    .circleRed {
+        height: 20px;
+        width: 20px;
+        background-color: #ED1B24;
+        border-radius: 50%;
+    }
+</style>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>

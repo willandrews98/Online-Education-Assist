@@ -25,21 +25,22 @@ namespace Dissertation_Project.Controllers
             return View();
         }
 
-        public IActionResult Create()
-        {
-            _
-        }
+/*        public IActionResult Create()
+        { 
 
-        public IActionResult Chat(int? id)
+            return RedirectToAction("Chat", new { sesson = SessonModel});
+        }
+*/
+        public IActionResult Chat(SessonModel sesson)
         {
-            if(id == null)
+            if(sesson == null)
             {
                 return NotFound();
             }
             
            
            
-            return View();
+            return View(sesson);
         }
 
         public IActionResult Privacy()

@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
-
+var group = "PrivateGroup";
 
 
 //Disable send button until connection is established
@@ -27,6 +27,12 @@ connection.on("ReplyTask", function (user, message) {
 
 })
 
+connection.on("ComplateTask", function (user) {
+
+
+    document.getElementById(user +"Complate").style.color = 'blue'
+})
+
 connection.start().then(function () {
     document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
@@ -42,6 +48,11 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     event.preventDefault();
 });
 
-document.getElementById("CorrectButton").addEventListener("click", function (event) {
-
+document.getElementById("SendButtonNotes").addEventListener("click", function (event) {
+    var user = document.getElementById("userInput").value;
+    var message = document.getElementById("NoteMessage").value;
+    connection.invoke("SendNote", user, message).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
 })
