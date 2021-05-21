@@ -19,22 +19,35 @@ connection.on("ReceiveTaskMessage", function (message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     h2.textContent = msg
     document.getElementById("TaskMessage").appendChild(h2)
+    document.getElementById("circleGreenJS").style.backgroundColor = "#006400";
+    document.getElementById("circleOrangeJS").style.backgroundColor = "#FFD300";
+    document.getElementById("circleRedJS").style.backgroundColor = "#C40234";
 })
 
-connection.on("ReplyTask", function (user, message) {
-    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-
-})
-
-connection.on("ComplateTask", function (user) {
-
-
-    document.getElementById(user +"Complate").style.color = 'blue'
+connection.on("ComplateTask", function (user, type) {
+    if (type == "Complate") {
+        document.getElementById("circleGreenJS").style.backgroundColor = "#00FF00";
+        document.getElementById("circleOrangeJS").style.backgroundColor = "#FF8000";
+        document.getElementById("circleRedJS").style.backgroundColor = "#C40234";
+    } else if (type == "NeedHelp") {
+        document.getElementById("circleGreenJS").style.backgroundColor = "#006400";
+        document.getElementById("circleOrangeJS").style.backgroundColor = "#FF8000";
+        document.getElementById("circleRedJS").style.backgroundColor = "#FF0000";
+    } else {
+        document.getElementById("circleGreenJS").style.backgroundColor = "#006400";
+        document.getElementById("circleOrangeJS").style.backgroundColor = "#FFD300";
+        document.getElementById("circleRedJS").style.backgroundColor = "#C40234";
+    }
 })
 
 connection.start().then(function () {
     document.getElementById("sendButton").disabled = false;
+
+    document.getElementById("circleGreenJS").style.backgroundColor = "#006400"; 
+    document.getElementById("circleOrangeJS").style.backgroundColor = "#FF8000";
+    document.getElementById("circleRedJS").style.backgroundColor = "#C40234";
+
+
 }).catch(function (err) {
     return console.error(err.toString());
 });
@@ -48,11 +61,27 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     event.preventDefault();
 });
 
-document.getElementById("SendButtonNotes").addEventListener("click", function (event) {
+document.getElementById("SendButtonGreen").addEventListener("click", function (event) {
     var user = document.getElementById("userInput").value;
-    var message = document.getElementById("NoteMessage").value;
-    connection.invoke("SendNote", user, message).catch(function (err) {
+    connection.invoke("CompTask", user, "Complate").catch(function (err) {
         return console.error(err.toString());
     });
+    event.preventDefault();
+})
+
+document.getElementById("SendButtonOrange").addEventListener("click", function (event) {
+    var user = document.getElementById("userInput").value;
+    connection.invoke("CompTask", user, "Pending").catch(function (err) {
+        return console.error(err.toString());
+    })
+    event.preventDefault();
+
+})
+
+document.getElementById("SendButtonRed").addEventListener("click", function (event) {
+    var user = document.getElementById("userInput").value;
+    connection.invoke("CompTask", user, "NeedHelp").catch(function (err) {
+        return console.error(err.toString());
+    })
     event.preventDefault();
 })
