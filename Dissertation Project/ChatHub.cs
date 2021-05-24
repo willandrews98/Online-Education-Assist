@@ -18,11 +18,6 @@ namespace Dissertation_Project
             await Clients.All.SendAsync("ReceiveTaskMessage", message);
         }
 
-        public async Task ReplyTask(string user, string message)
-        {
-            await Clients.All.SendAsync("ReplyTask", user, message);
-        }
-
         public async Task CompTask(string user, string type)
         {
             await Clients.All.SendAsync("ComplateTask", user, type);
