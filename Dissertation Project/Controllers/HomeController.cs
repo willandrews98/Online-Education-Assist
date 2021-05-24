@@ -25,13 +25,13 @@ namespace Dissertation_Project.Controllers
             return View();
         }
 
-/*        public IActionResult Create()
-        { 
 
-            return RedirectToAction("Chat", new { sesson = SessonModel});
+        public IActionResult Tutor()
+        {
+            return View();
         }
-*/
-        public IActionResult Chat(SessonModel sesson)
+
+        public IActionResult Chat(int sesson)
         {
             if(sesson == null)
             {
