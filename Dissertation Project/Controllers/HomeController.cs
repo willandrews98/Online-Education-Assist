@@ -56,17 +56,22 @@ namespace Dissertation_Project.Controllers
                 return NotFound();
             }
 
+
             return View(Sesson);
         }
 
         
         public async Task<IActionResult> Chat(Guid id)
         {
-            var Sesson = await _context.Sessons
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var Sesson = from c in _context.Sessons select c;
 
+            if (Sesson == null)
+            {
+                return NotFound();
+            }
+
+            Sesson = Sesson.Where(m => m.Id == id);
             
-
 
             return View(Sesson);
         }
