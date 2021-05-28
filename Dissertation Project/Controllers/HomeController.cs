@@ -48,16 +48,24 @@ namespace Dissertation_Project.Controllers
 
         public async Task<IActionResult> Tutor(Guid id)
         {
-            var Sesson = await _context.Sessons
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var Sesson = from c in _context.Sessons select c;
 
-            if(Sesson == null)
+            if (Sesson == null)
+            {
+                return NotFound();
+            }
+
+            var Teacher = from T in _context.Tutor select T;
+
+            if(Teacher == null)
             {
                 return NotFound();
             }
 
 
-            return View(Sesson);
+            Sesson = Sesson.Where(m => m.Id == id);
+
+            return View(await Sesson.ToListAsync());
         }
 
         
@@ -73,7 +81,7 @@ namespace Dissertation_Project.Controllers
             Sesson = Sesson.Where(m => m.Id == id);
             
 
-            return View(Sesson);
+            return View(await Sesson.ToListAsync());
         }
 
         public IActionResult Privacy()

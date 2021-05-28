@@ -10,17 +10,17 @@ namespace Dissertation_Project
     {
         public async Task SendMessage(string groupName, string user, string message)
         {
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", user, message);
+            await Clients.All.SendAsync("ReceiveMessage", groupName, user, message);
         }
 
-        public async Task SendTask(string message)
+        public async Task SendTask(string groupName,string message)
         {
-            await Clients.All.SendAsync("ReceiveTaskMessage", message);
+            await Clients.All.SendAsync("ReceiveTaskMessage", groupName, message);
         }
 
-        public async Task CompTask(string user, string type)
+        public async Task CompTask(string groupName,string user, string type)
         {
-            await Clients.All.SendAsync("ComplateTask", user, type);
+            await Clients.All.SendAsync("ComplateTask", groupName, user, type);
         }
 
         public async Task AddToGroup(string groupName)

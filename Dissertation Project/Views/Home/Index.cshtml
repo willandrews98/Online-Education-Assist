@@ -10,10 +10,7 @@
             <div class="card">
                 <h2 class="card-header">@item.Host</h2>
                 <div class="card-body">
-                    <form asp-action="Chat">
-                        <input type="hidden" asp-for="@item.Id" />
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </form>
+                    <a asp-action="Chat" asp-route-id="@item.Id" class="btn btn-primary" >Join </a>
                 </div>
             </div>
         }
