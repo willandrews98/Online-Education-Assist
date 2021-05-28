@@ -42,7 +42,10 @@
 </div>
 
 <input type="hidden" id="taskInput" />
-<input type="text" id="groupName" value="Test" />
+@foreach (var item in Model)
+{
+    <input type="hidden" id="groupName" value="@item.Id" />
+}
 <input type="hidden" id="pages" value="Chat" />
 <input type="hidden" id="sendTaskButton" value="Send Message" />
 
