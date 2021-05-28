@@ -11,6 +11,8 @@ namespace Dissertation_Project.Data
     {
 
         public DbSet<SessonModel> Sessons { get; set; }
+        public DbSet<TutorModel> Tutor { get; set; }
+        public DbSet<StudentModel> Student { get; set; }
 
         public AppData(DbContextOptions<AppData> options) : base(options)
         {
