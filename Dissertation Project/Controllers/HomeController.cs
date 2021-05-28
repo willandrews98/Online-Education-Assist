@@ -55,14 +55,6 @@ namespace Dissertation_Project.Controllers
                 return NotFound();
             }
 
-            var Teacher = from T in _context.Tutor select T;
-
-            if(Teacher == null)
-            {
-                return NotFound();
-            }
-
-
             Sesson = Sesson.Where(m => m.Id == id);
 
             return View(await Sesson.ToListAsync());
