@@ -8,6 +8,7 @@ namespace Dissertation_Project.Models
 {
     public class SessonModel
     {
+        // This is the sesson model
         [Key]
         public Guid Id { get; set; }
 

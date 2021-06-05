@@ -35,6 +35,12 @@ namespace Dissertation_Project
             Console.WriteLine($"{Context.ConnectionId} removed to {groupName}");
         }
 
+        public async Task ClosingSesson(string groupName)
+        {
+            await Clients.All.SendAsync("CloseSesson", groupName);
+            Console.WriteLine($"{groupName} is closeing sesson");
+        }
+
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();

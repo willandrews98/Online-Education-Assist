@@ -76,9 +76,15 @@ namespace Dissertation_Project.Controllers
             return View(await Sesson.ToListAsync());
         }
 
-        public IActionResult Privacy()
+
+        public async Task<IActionResult> Remove(Guid id)
         {
-            return View();
+            var sessonModel = await _context.Sessons.FindAsync(id);
+            _context.Sessons.Remove(sessonModel);
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction(nameof(Index));
         }
 
         [AllowAnonymous]
