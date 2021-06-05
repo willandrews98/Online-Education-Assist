@@ -9,10 +9,8 @@ namespace Dissertation_Project.Data
 {
     public class AppData : DbContext
     {
-
+        // This is connect to the database
         public DbSet<SessonModel> Sessons { get; set; }
-        public DbSet<TutorModel> Tutor { get; set; }
-        public DbSet<StudentModel> Student { get; set; }
 
         public AppData(DbContextOptions<AppData> options) : base(options)
         {

@@ -33,9 +33,9 @@ connection.on("ReceiveTaskMessage", function (groupName, message) {
         var whatPage = document.getElementById("pages").value;
 
         if (whatPage == "Chat") {
-            document.getElementById("circleGreenJS").style.backgroundColor = "#006400";
+            document.getElementById("circleGreenJS").style.backgroundColor = "#D0D0D0";
             document.getElementById("circleOrangeJS").style.backgroundColor = "#FFD300";
-            document.getElementById("circleRedJS").style.backgroundColor = "#C40234";
+            document.getElementById("circleRedJS").style.backgroundColor = "#D0D0D0";
         }
     }
 
@@ -53,31 +53,44 @@ connection.on("ComplateTask", function (groupName, user, type) {
         if (type == "Complate") {
             if (whatPage == "Chat") {
                 document.getElementById("circleGreenJS").style.backgroundColor = "#00FF00";
-                document.getElementById("circleOrangeJS").style.backgroundColor = "#FF8000";
-                document.getElementById("circleRedJS").style.backgroundColor = "#C40234";
+                document.getElementById("circleOrangeJS").style.backgroundColor = "#D0D0D0";
+                document.getElementById("circleRedJS").style.backgroundColor = "#D0D0D0";
             } else {
                 document.getElementById("complateList").appendChild(li);
             }
 
         } else if (type == "NeedHelp") {
             if (whatPage == "Chat") {
-                document.getElementById("circleGreenJS").style.backgroundColor = "#006400";
-                document.getElementById("circleOrangeJS").style.backgroundColor = "#FF8000";
+                document.getElementById("circleGreenJS").style.backgroundColor = "#D0D0D0";
+                document.getElementById("circleOrangeJS").style.backgroundColor = "#D0D0D0";
                 document.getElementById("circleRedJS").style.backgroundColor = "#FF0000";
-            } else {
-                document.getElementById("Pending").appendChild(li);
-            }
-
-        } else {
-            if (whatPage == "Chat") {
-                document.getElementById("circleGreenJS").style.backgroundColor = "#006400";
-                document.getElementById("circleOrangeJS").style.backgroundColor = "#FFD300";
-                document.getElementById("circleRedJS").style.backgroundColor = "#C40234";
             } else {
                 document.getElementById("RequiresList").appendChild(li);
             }
 
+        } else {
+            if (whatPage == "Chat") {
+                document.getElementById("circleGreenJS").style.backgroundColor = "#D0D0D0";
+                document.getElementById("circleOrangeJS").style.backgroundColor = "#FFD300";
+                document.getElementById("circleRedJS").style.backgroundColor = "#D0D0D0";
+            } else {
+                document.getElementById("PendingList").appendChild(li);
+            }
+
         }
+    }
+})
+
+// This will close the sesson
+connection.on("CloseSesson", function (groupName) {
+
+    if (groupName == document.getElementById("groupName").value) {
+
+        connection.invoke("RemoveToGroup", groupName).catch(function (err) {
+            return console.error(err.toString());
+        })
+
+        window.location.href = "index.html"
     }
 })
 
@@ -85,18 +98,18 @@ connection.on("ComplateTask", function (groupName, user, type) {
 connection.start().then(function () {
     document.getElementById("sendButton").disabled = false;
 
-  /*  var user = document.getElementById("userInput").value;
+    var user = document.getElementById("userInput").value;
     var groupName = document.getElementById("groupName").value;
  
     connection.invoke("JoinGroup", user, groupName)
-    e.preventDefault(); */
+     
 
     var whatPage = document.getElementById("pages").value;
 
     if (whatPage == "Chat") {
-        document.getElementById("circleGreenJS").style.backgroundColor = "#006400";
+        document.getElementById("circleGreenJS").style.backgroundColor = "#D0D0D0";
         document.getElementById("circleOrangeJS").style.backgroundColor = "#FF8000";
-        document.getElementById("circleRedJS").style.backgroundColor = "#C40234";
+        document.getElementById("circleRedJS").style.backgroundColor = "#D0D0D0";
     }
 
 
@@ -150,7 +163,21 @@ document.getElementById("SendButtonOrange").addEventListener("click", function (
 //send button for red
 document.getElementById("SendButtonRed").addEventListener("click", function (event) {
     var user = document.getElementById("userInput").value;
+    var groupName = document.getElementById("groupName").value;
     connection.invoke("CompTask", groupName,user, "NeedHelp").catch(function (err) {
+        return console.error(err.toString());
+    })
+    event.preventDefault();
+})
+
+//send button for closing a sesson
+document.getElementById("CloseButton").addEventListener("click", function (event) {
+    var groupName = document.getElementById("groupName").value;
+    connection.invoke("RemoveToGroup", groupName).catch(function (err) {
+        return console.error(err.toString());
+    })
+
+    connection.invoke("ClosingSesson", groupName).catch(function (err) {
         return console.error(err.toString());
     })
     event.preventDefault();
