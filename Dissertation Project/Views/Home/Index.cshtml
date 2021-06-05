@@ -1,8 +1,21 @@
-﻿@{
+﻿@model IEnumerable<Dissertation_Project.Models.SessonModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- This is the homepage where all active sesson to be able to join  -->
+<div class="container">
+    <div class="align-items-center row">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <h2 class="card-header">@item.Host</h2>
+                <div class="card-body">
+                    <a asp-action="Chat" asp-route-id="@item.Id" class="btn btn-primary" >Join </a>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
+

@@ -1,7 +1,6 @@
 ﻿@using System.Security.Principal
 @model IEnumerable<Dissertation_Project.Models.SessonModel>
 
-<!-- This is the page for the students -->
 <div class="container-fluid row">
     <div class="col-sm-8">
         <div class="card">
@@ -10,21 +9,37 @@
             </div>
         </div>
         <div class="row text-sm-center mt-2">
-            <div class="col-sm-4 card">
-                <h5 class="card-header">@User.Identity.Name</h5>
+            <div class="col-4 card">
+                <h5 class="card-header">Complete</h5>
                 <div class="card-body">
-                    <div class="circle" id="circleGreenJS"></div>
-                    <div class="circle" id="circleOrangeJS"></div>
-                    <div class="circle" id="circleRedJS"></div>
+                    <ul id="complateList"></ul>
+                </div>
+            </div>
+            <div class="col-4 card">
+                <h5 class="card-header">Pending</h5>
+                <div class="card-body">
+                    <ul id="PendingList"></ul>
+                </div>
+            </div>
+            <div class="col-4 card">
+                <h5 class="card-header">Requires Assistance</h5>
+                <div class="card-body">
+                    <ul id="RequiresList"></ul>
                 </div>
             </div>
 
         </div>
 
         <div class="mt-4 card card-body">
-            <input type="button" id="SendButtonGreen" style="background-color: #00FF00" value="Complete" />
-            <input type="button" id="SendButtonOrange" style="background-color: #FFD300" value="Pending" />
-            <input type="button" id="SendButtonRed" style="background-color: #FF0000" value="Requires Assistance" />
+            <input type="text" id="taskInput" />
+            <input type="button" id="sendTaskButton" value="Send Task" />
+            <br>
+            @foreach (var item in Model)
+            {
+                <input type="hidden" id="groupName" value="@item.Id" />
+                <a class="btn btn-primary" asp-action="Remove" asp-route-id="@item.Id" id="CloseButton">Close Sesson</a>
+            }
+
         </div>
     </div>
     <div class="col-sm-4">
@@ -41,14 +56,7 @@
         </div>
     </div>
 </div>
-
-<input type="hidden" id="taskInput" />
-@foreach (var item in Model)
-{
-    <input type="hidden" id="groupName" value="@item.Id" />
-}
-<input type="hidden" id="pages" value="Chat" />
-<input type="hidden" id="sendTaskButton" value="Send Message" />
+<input type="hidden" id="pages" value="Tutor" />
 
 <style>
     .circle {
