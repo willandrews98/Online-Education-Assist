@@ -1,5 +1,5 @@
 # Online Education Assist (OEA)
-Education platform to assist in providing educationa online remotely
+Education platform to assist in providing education online remotely
 
 Including:
 > - Bootstrap V4
