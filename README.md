@@ -11,7 +11,7 @@ Open Visual Studio and naviagte to appsettings.json and change the following:
 > - Domain Name
 > - TennantID
 > - ClientID
-To match your Azure Acive Directory
+To match your Azure Active Directory
 
 ## Database
 Change DefaultConnection in appsettings.json to your own selcted database.<br />
